@@ -1,11 +1,12 @@
-import Server from "./class/server";
+import ServerS from "./class/server";
 import router from "./routes/router";
 import bodyParser from "body-parser";
 import cors from "cors";
 
 
 
-const server = new Server();
+// const server = new ServerS();
+const server = ServerS.instance;
 
 // BodyParser
 // Los middlewares son códigos que se ejecutan antes de que una petición HTTP llegue al manejador de rutas o antes de que un cliente reciba una respuesta,
