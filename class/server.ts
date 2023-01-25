@@ -4,6 +4,8 @@ import { SERVER_PORT } from '../global/environment';
 // import socketIO from 'socket.io';
 import { Server } from "socket.io";
 import http from 'http';
+// importar todo lo que se encuentre en socket y ponerle un alias
+import * as socket from '../sockets/socket';
 
 
 export default class ServerS {
@@ -15,6 +17,8 @@ export default class ServerS {
     public port: number;
 
     // public io: socketIO.Server;
+    // servidor de sockets, tiene el control y conocimiento de q personas
+    // están conectadas
     public io: Server;
     private httpServer: http.Server;
 
@@ -45,6 +49,17 @@ export default class ServerS {
 
         this.io.on('connection', cliente => {
             console.log('Cliente conectado');
+            
+            // Mensajes
+            socket.mensaje(cliente, this.io);
+
+
+            // desconectar
+            socket.desconectar(cliente);
+
+            // cliente.on('disconnect', () => {
+            //     console.log('Cliente desconectado');
+            // })
         });
 
     }
